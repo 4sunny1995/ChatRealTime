@@ -2028,6 +2028,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.onLoadFunction();
+    this.listenChannel();
   },
   methods: {
     onLoadFunction: function onLoadFunction() {
@@ -2159,10 +2160,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     listenChannel: function listenChannel() {
-      Echo.channel('chatroom').listen('MessagePosted', function (response) {
-        console.log(response); // let message = data.message
-        // message.user = data.user
-        // this.list_messages.push(message)
+      var _this5 = this;
+
+      Echo.channel('laravel_database_chatroom').listen('MessagePosted', function (response) {
+        console.log(response);
+        var message = data.message;
+        message.user = data.user;
+
+        _this5.listMessages.push(message);
       });
     }
   }

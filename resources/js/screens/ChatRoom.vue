@@ -32,7 +32,7 @@ export default {
    },
    mounted() {
        this.onLoadFunction()
-
+       this.listenChannel()
    },
    methods:{
        async onLoadFunction(){
@@ -79,12 +79,12 @@ export default {
             }
         },
         listenChannel(){
-            Echo.channel('chatroom')
+            Echo.channel('laravel_database_chatroom')
             .listen('MessagePosted', (response) => {
                 console.log(response)
-                // let message = data.message
-                // message.user = data.user
-                // this.list_messages.push(message)
+                let message = data.message
+                message.user = data.user
+                this.listMessages.push(message)
     })
         }
    }

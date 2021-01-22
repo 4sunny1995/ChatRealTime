@@ -34,7 +34,6 @@ class MessagePosted
      */
     public function broadcastOn()
     {
-        return ['chatroom'];
-        // return new PrivateChannel('channel-name');
+        return new PrivateChannel('chatroom');
     }
 }

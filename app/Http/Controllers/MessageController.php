@@ -41,7 +41,8 @@ class MessageController extends Controller
         $message= Message::create($request->all());
         $user = Auth::user();
         broadcast(new MessagePosted($message,$user))->toOthers();
-        return $message->load($user);
+        $message['user']=$user;
+        return $message;
     }
 
     /**
