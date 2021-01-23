@@ -32,7 +32,15 @@ export default {
    },
    mounted() {
        this.onLoadFunction()
-       this.listenChannel()
+    //    this.listenChannel()
+   },
+   created(){
+       Echo.channel('laravel_database_chatroom').listen('MessagePosted', (response) => {
+                console.log(response)
+                let message = response.message
+                message.user = response.user
+                this.listMessages.push(message)
+            })
    },
    methods:{
        async onLoadFunction(){
@@ -71,22 +79,21 @@ export default {
             {
                 const response = await axios.get('/chat/getUserLogin')
                 this.currentUserLogin = response.data
-                console.log(response.data)
             }
             catch(error)
             {
                 console.error(error)
             }
         },
-        listenChannel(){
-            Echo.channel('laravel_database_chatroom')
-            .listen('MessagePosted', (response) => {
-                console.log(response)
-                let message = data.message
-                message.user = data.user
-                this.listMessages.push(message)
-    })
-        }
+    //     listenChannel(){
+    //         Echo.channel('laravel_database_chatroom')
+    //         .listen('MessagePosted', (response) => {
+    //             console.log(response)
+    //             let message = data.message
+    //             message.user = data.user
+    //             this.listMessages.push(message)
+    // })
+    //     }
    }
 }
 </script>

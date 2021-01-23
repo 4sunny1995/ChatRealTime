@@ -11,8 +11,9 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class MessagePosted
+class MessagePosted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -23,6 +24,7 @@ class MessagePosted
      */
     public function __construct(Message $message,User $user)
     {
+        
         $this->user = $user;
         $this->message = $message;
     }
@@ -34,6 +36,7 @@ class MessagePosted
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chatroom');
+        // Log::info($this->message);
+        return ['chatroom'];
     }
 }
