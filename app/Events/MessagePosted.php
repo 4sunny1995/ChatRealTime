@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Log;
 class MessagePosted implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $message;
+    public $user;
     /**
      * Create a new event instance.
      *
@@ -36,7 +37,8 @@ class MessagePosted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // Log::info($this->message);
+        Log::info('1');
+        Log::info($this->message);
         return ['chatroom'];
     }
 }

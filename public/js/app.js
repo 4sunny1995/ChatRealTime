@@ -2115,6 +2115,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log(response);
       var message = response.message;
       message.user = response.user;
+      console.log(message);
 
       _this.listMessages.push(message);
     });
